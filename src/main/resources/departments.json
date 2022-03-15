@@ -1,0 +1,91 @@
+{
+  "success": true,
+  "datatype": "ALL DEPARTMENTS",
+  "numOfResults": 14,
+  "data": [
+    {
+      "department_name": "Gadgets",
+      "department_id": "gadgets",
+      "department_numProducts": 102,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fgadgets.jpg?alt=media&token=e4003229-7701-4d4e-b462-78af8dc1e534"
+    },
+    {
+      "department_name": "Appliances",
+      "department_id": "appliances",
+      "department_numProducts": 90,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fappliance.jpg?alt=media&token=3de6a26a-7477-4823-be44-a5d65dd19646"
+    },
+    {
+      "department_name": "Home & Living",
+      "department_id": "homeandliving",
+      "department_numProducts": 132,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fhomeandliving.jpg?alt=media&token=ee0aadfc-0f84-49e0-b790-eda553ffdc80"
+    },
+    {
+      "department_name": "School Supplies",
+      "department_id": "schoolsupplies",
+      "department_numProducts": 114,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fschoolsupplies.jpg?alt=media&token=e3a10931-3fd2-4e6a-8e73-8a5c977f1e5f"
+    },
+    {
+      "department_name": "Health & Beauty",
+      "department_id": "healthandbeauty",
+      "department_numProducts": 78,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fhealthandbeauty.jpg?alt=media&token=def4c8c9-0ba5-4c10-8e5e-80b4937106d2"
+    },
+    {
+      "department_name": "Babies",
+      "department_id": "babies",
+      "department_numProducts": 48,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fbabies.jpg?alt=media&token=4a4f1521-8b13-47cb-8dd7-6e857be7e315"
+    },
+    {
+      "department_name": "Groceries",
+      "department_id": "groceries",
+      "department_numProducts": 228,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fgroceries.jpg?alt=media&token=d73dde3e-57bb-44c1-baff-a23bbf622067"
+    },
+    {
+      "department_name": "Pets",
+      "department_id": "pets",
+      "department_numProducts": 90,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fpets.jpg?alt=media&token=b659f0ff-6021-47b1-92d2-61355c5717a1"
+    },
+    {
+      "department_name": "Fashion Women",
+      "department_id": "fashionwomen",
+      "department_numProducts": 114,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Ffashionwomen.jpg?alt=media&token=fdda11cd-7b18-4fee-a00d-dd0d0dd5d6c8"
+    },
+    {
+      "department_name": "Fashion Men",
+      "department_id": "fashionmen",
+      "department_numProducts": 96,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Ffashionmen.jpg?alt=media&token=43414035-b101-466b-823b-c705ea57c9e7"
+    },
+    {
+      "department_name": "Accessories",
+      "department_id": "accessories",
+      "department_numProducts": 66,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Faccessories.jpg?alt=media&token=a8d90832-b905-4753-b8e9-f7605ed6ca0c"
+    },
+    {
+      "department_name": "Sports & Lifestyle",
+      "department_id": "sportsandlifestyle",
+      "department_numProducts": 234,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fsport.png?alt=media&token=6024cc28-8157-4489-9d3a-299b51fb8f77"
+    },
+    {
+      "department_name": "Toys and Collectibles",
+      "department_id": "toysandcollectibles",
+      "department_numProducts": 138,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Ftoys.jpg?alt=media&token=5e08162b-4d5c-4870-9b5b-75003463b889"
+    },
+    {
+      "department_name": "Automotive",
+      "department_id": "automotive",
+      "department_numProducts": 54,
+      "department_imageUrl": "https://firebasestorage.googleapis.com/v0/b/epam-marketplace-app.appspot.com/o/departmentImage%2Fautomotive.jpg?alt=media&token=3dc46a03-b3fb-4398-b023-4988b105d9b9"
+    }
+  ]
+}
