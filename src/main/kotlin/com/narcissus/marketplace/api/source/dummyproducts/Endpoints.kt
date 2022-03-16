@@ -6,13 +6,10 @@ object Endpoints {
     val PRODUCTS = endpoint("products")
     fun product(id: String) = "$PRODUCTS/$id"
 
-    val PRODUCTS_TOP_SALES = endpoint("$PRODUCTS/topsales")
-    val PRODUCTS_TOP_RATED = endpoint("$PRODUCTS/toprated")
-    val PRODUCTS_RANDOM = endpoint("$PRODUCTS/random")
-
-    val SEARCH = endpoint("$PRODUCTS/search")
-
-    val DEPARTMENTS = endpoint("departments")
+    val PRODUCTS_TOP_SALES = "$PRODUCTS/topsales"
+    val PRODUCTS_TOP_RATED = "$PRODUCTS/toprated"
+    val PRODUCTS_RANDOM = "$PRODUCTS/random"
+    val SEARCH = "$PRODUCTS/search"
 
     val CHECKOUT = endpoint("actions/checkout")
 }

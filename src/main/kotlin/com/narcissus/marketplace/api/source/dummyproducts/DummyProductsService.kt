@@ -22,7 +22,7 @@ interface DummyProductsService {
     companion object {
         fun newInstance(): DummyProductsService {
             return DummyProductsServiceImpl(
-                apiKey = Config.apiKey,
+                apiKey = Config::apiKey,
                 httpClient = HttpClient()
             )
         }
