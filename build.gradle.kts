@@ -11,7 +11,7 @@ plugins {
 group = "com.narcissus"
 version = "0.0.1"
 application {
-    mainClass.set("com.narcissus.ApplicationKt")
+    mainClass.set("com.narcissus.marketplace.api.ApplicationKt")
 }
 
 repositories {
