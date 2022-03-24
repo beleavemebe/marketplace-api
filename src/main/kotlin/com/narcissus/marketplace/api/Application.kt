@@ -17,7 +17,6 @@ fun main() {
 
             connector {
                 port = System.getenv("PORT").toInt()
-                host = "127.0.0.1"
             }
 
             module {
