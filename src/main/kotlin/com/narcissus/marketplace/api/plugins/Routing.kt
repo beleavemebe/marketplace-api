@@ -1,12 +1,15 @@
 package com.narcissus.marketplace.api.plugins
 
 import com.narcissus.marketplace.api.di.ServiceLocator
+import com.narcissus.marketplace.api.model.ApiStatus
 import com.narcissus.marketplace.api.model.OrderRequest
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.File
 
 fun Application.configureRouting() {
@@ -16,6 +19,11 @@ fun Application.configureRouting() {
         get("departments") {
             val departmentsJsonFile = File("src/main/resources/departments.json")
             call.respondFile(departmentsJsonFile)
+        }
+
+        get("status") {
+            val status = ApiStatus(isAvailable = true)
+            call.respond(Json.encodeToString(status))
         }
 
         get("products/{id}") {

@@ -16,7 +16,7 @@ fun main() {
             config = HoconApplicationConfig(ConfigFactory.load())
 
             connector {
-                port = System.getenv("PORT").toInt()
+                port = System.getenv("PORT")?.toInt() ?: 8080
             }
 
             module {
