@@ -3,17 +3,9 @@ package com.narcissus.marketplace.api.source.dummyproducts.hardcoded
 import com.narcissus.marketplace.api.model.ProductDetails
 import com.narcissus.marketplace.api.model.ProductPreview
 import com.narcissus.marketplace.api.model.Review
+import com.narcissus.marketplace.api.model.SimilarProduct
 
 object FakeData {
-    val review = Review(
-        "1",
-        "1",
-        "Joe Ordinary",
-        "Sample review",
-        4,
-        "https://miro.medium.com/fit/c/176/176/1*pX7p3ApThISh42UA-JfF7A.png"
-    )
-
     val details = ProductDetails(
         "1",
         "https://github.com/rookiemonkey/dummy-products-api/blob/master/products/gadgets/basicphone_600.png?raw=true",
@@ -28,14 +20,19 @@ object FakeData {
         213,
         "This is Nokia",
         listOf(
-            review,
             Review("1", "1", "Joe Ordinary", "Sample review 1", 3, "https://miro.medium.com/fit/c/176/176/1*pX7p3ApThISh42UA-JfF7A.png"),
             Review("2", "1", "Joe Ordinary", "Sample review 2", 5, "https://miro.medium.com/fit/c/176/176/1*pX7p3ApThISh42UA-JfF7A.png"),
             Review("3", "1", "Joe Ordinary", "Sample review 3", 4, "https://miro.medium.com/fit/c/176/176/1*pX7p3ApThISh42UA-JfF7A.png"),
         ),
-        emptyList()
+        listOf(
+            SimilarProduct("1", "https://github.com/rookiemonkey/dummy-products-api/blob/master/products/gadgets/basicphone_600.png?raw=true", "Nokia", 122, "Mobile Phone", "gadgets", 233, 5),
+            SimilarProduct("1", "https://github.com/rookiemonkey/dummy-products-api/blob/master/products/gadgets/basicphone_600.png?raw=true", "Nokia", 122, "Mobile Phone", "gadgets", 233, 5),
+            SimilarProduct("1", "https://github.com/rookiemonkey/dummy-products-api/blob/master/products/gadgets/basicphone_600.png?raw=true", "Nokia", 122, "Mobile Phone", "gadgets", 233, 5),
+            SimilarProduct("1", "https://github.com/rookiemonkey/dummy-products-api/blob/master/products/gadgets/basicphone_600.png?raw=true", "Nokia", 122, "Mobile Phone", "gadgets", 233, 5),
+            SimilarProduct("1", "https://github.com/rookiemonkey/dummy-products-api/blob/master/products/gadgets/basicphone_600.png?raw=true", "Nokia", 122, "Mobile Phone", "gadgets", 233, 5),
+        )
     )
-    
+
     val preview = details.toProductPreview()
 }
 
