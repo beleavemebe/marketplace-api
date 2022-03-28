@@ -2,6 +2,8 @@ package com.narcissus.marketplace.api.source.dummyproducts
 
 import com.narcissus.marketplace.api.Config
 import com.narcissus.marketplace.api.model.OrderRequest
+import com.narcissus.marketplace.api.source.dummyproducts.actual.DummyProductsServiceImpl
+import com.narcissus.marketplace.api.source.dummyproducts.hardcoded.HardcodedDummyProductsServiceImpl
 import io.ktor.client.*
 
 interface DummyProductsService {
@@ -21,10 +23,14 @@ interface DummyProductsService {
 
     companion object {
         fun newInstance(): DummyProductsService {
-            return DummyProductsServiceImpl(
-                apiKey = Config::apiKey,
-                httpClient = HttpClient()
-            )
+            return if (true) {
+                HardcodedDummyProductsServiceImpl()
+            } else {
+                DummyProductsServiceImpl(
+                    apiKey = Config::apiKey,
+                    httpClient = HttpClient()
+                )
+            }
         }
     }
 }

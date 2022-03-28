@@ -1,4 +1,4 @@
-package com.narcissus.marketplace.api.source.dummyproducts
+package com.narcissus.marketplace.api.source.dummyproducts.actual
 
 object Endpoints {
     private fun endpoint(path: String) = "${Constants.BASE_URL}/$path"

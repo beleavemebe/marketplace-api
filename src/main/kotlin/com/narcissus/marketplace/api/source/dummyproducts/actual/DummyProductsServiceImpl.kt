@@ -1,6 +1,7 @@
-package com.narcissus.marketplace.api.source.dummyproducts
+package com.narcissus.marketplace.api.source.dummyproducts.actual
 
 import com.narcissus.marketplace.api.model.OrderRequest
+import com.narcissus.marketplace.api.source.dummyproducts.DummyProductsService
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
