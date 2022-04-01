@@ -23,14 +23,10 @@ interface DummyProductsService {
 
     companion object {
         fun newInstance(): DummyProductsService {
-            return if (true) {
-                HardcodedDummyProductsServiceImpl()
-            } else {
-                DummyProductsServiceImpl(
-                    apiKey = Config::apiKey,
-                    httpClient = HttpClient()
-                )
-            }
+            return DummyProductsServiceImpl(
+                apiKey = Config::apiKey,
+                httpClient = HttpClient()
+            )
         }
     }
 }
