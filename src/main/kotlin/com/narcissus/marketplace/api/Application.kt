@@ -2,7 +2,7 @@ package com.narcissus.marketplace.api
 
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import com.narcissus.marketplace.api.plugins.*
+import com.narcissus.marketplace.api.route.*
 import com.typesafe.config.ConfigFactory
 import io.ktor.server.application.*
 import io.ktor.server.config.*

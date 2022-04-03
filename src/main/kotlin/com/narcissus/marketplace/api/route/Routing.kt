@@ -1,8 +1,8 @@
-package com.narcissus.marketplace.api.plugins
+package com.narcissus.marketplace.api.route
 
 import com.narcissus.marketplace.api.di.ServiceLocator
 import com.narcissus.marketplace.api.model.ApiStatus
-import com.narcissus.marketplace.api.model.OrderRequest
+import com.narcissus.marketplace.api.model.request.OrderRequest
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
@@ -13,7 +13,8 @@ import kotlinx.serialization.json.Json
 import java.io.File
 
 fun Application.configureRouting() {
-    val api = ServiceLocator.dummyProductsApiClient
+    val productRepository = ServiceLocator.productRepository
+    val checkoutService = ServiceLocator.checkoutService
 
     routing {
         get("departments") {
@@ -28,35 +29,44 @@ fun Application.configureRouting() {
 
         get("products/{id}") {
             val id = call.parameters["id"] ?: return@get
-            val response = api.getProductDetails(id)
+            val response = productRepository.getProductDetails(id, "true")
             call.respond(response)
         }
 
         get("products/search") {
             val query = call.parameters["term"] ?: return@get
-            val response = api.searchProducts(query)
+            val response = productRepository.searchProducts(query, 1, 1000)
             call.respond(response)
         }
 
         get("products/random") {
-            val response = api.getRandomProducts(8, 1)
+            val response = productRepository.getRandomProducts(8, 1)
             call.respond(response)
         }
 
         get("products/topsales") {
-            val response = api.getTopSalesProducts(8, 1)
+            val response = productRepository.getTopSalesProducts(8, 1)
             call.respond(response)
         }
 
         get("products/toprated") {
-            val response = api.getTopRatedProducts(8, 1)
+            val response = productRepository.getTopRatedProducts(8, 1)
             call.respond(response)
         }
 
-        post("actions/checkout") {
-            val order = call.receiveOrNull<OrderRequest>()
+        get("pic/{department}/{image}") {
+            val department = call.parameters["department"]
+                ?: throw BadRequestException("Missing 'department' parameter")
+            val image = call.parameters["image"]
+                ?: throw BadRequestException("Missing 'image' parameter")
+            val imageFile = File("src/main/resources/products/$department/$image")
+            call.respondFile(imageFile)
+        }
+
+        post("actions/checkout")  {
+            val orderRequest = call.receiveOrNull<OrderRequest>()
                 ?: throw BadRequestException("Could not deserialize order request")
-            val response = api.checkout(order)
+            val response = checkoutService.checkout(orderRequest)
             call.respond(response)
         }
     }

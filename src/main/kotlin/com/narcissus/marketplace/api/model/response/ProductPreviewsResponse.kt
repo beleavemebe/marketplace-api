@@ -1,5 +1,6 @@
-package com.narcissus.marketplace.api.model
+package com.narcissus.marketplace.api.model.response
 
+import com.narcissus.marketplace.api.model.ProductPreview
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

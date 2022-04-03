@@ -1,7 +1,11 @@
 package com.narcissus.marketplace.api.di
 
-import com.narcissus.marketplace.api.source.dummyproducts.DummyProductsService
+import com.narcissus.marketplace.api.repository.order.OrderRepositoryImpl
+import com.narcissus.marketplace.api.repository.product.ProductRepository
+import com.narcissus.marketplace.api.service.checkout.CheckoutService
 
 object ServiceLocator {
-    val dummyProductsApiClient by lazy { DummyProductsService.newInstance() }
+    val productRepository by lazy { ProductRepository.newInstance() }
+    val orderRepository by lazy { OrderRepositoryImpl() }
+    val checkoutService by lazy { CheckoutService(orderRepository) }
 }
