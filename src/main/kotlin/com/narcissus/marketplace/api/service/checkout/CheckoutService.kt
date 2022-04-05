@@ -11,9 +11,10 @@ class CheckoutService(
     suspend fun checkout(orderRequest: OrderRequest): Order {
         delay(4000L)
         return Order(
+            orderId = orderRequest.id,
             orderNumber = null,
             paymentStatus = "CANCELED",
-            message = "Transaction failed.",
+            message = "Transaction failed."
         )
     }
 }

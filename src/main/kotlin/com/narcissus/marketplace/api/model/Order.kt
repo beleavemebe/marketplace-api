@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Order(
+    @SerialName("order_id")
+    val orderId: String,
     @SerialName("order_number")
     val orderNumber: Int?,
     @SerialName("order_payment_status")
