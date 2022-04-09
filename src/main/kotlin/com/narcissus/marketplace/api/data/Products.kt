@@ -18,5 +18,4 @@ object Products : UUIDTable() {
     var rating = integer("rating")
     var sales = integer("sales")
     var description = text("description")
-    var similarProducts = optReference("similar_products", Products)
 }
