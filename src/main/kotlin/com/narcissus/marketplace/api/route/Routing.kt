@@ -58,6 +58,7 @@ fun Application.configureRouting() {
 
             val response = productRepository
                 .searchProducts(query, limit, page)
+                .wrapToResponse()
 
             call.respond(response)
         }
