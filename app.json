@@ -1,0 +1,8 @@
+{
+  "name": "Narcissus Marketplace API",
+  "description": "The API for marketplace app",
+  "image": "heroku/java",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
