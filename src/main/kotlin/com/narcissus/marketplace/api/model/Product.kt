@@ -21,7 +21,7 @@ data class Product(
     val sales: Int,
     val description: String,
     val reviews: List<Review>,
-    val similarProducts: List<String>,
+    val similarProductIds: List<String>,
 ) {
     fun toProductDetails(): ProductDetails =
         ProductDetails(
@@ -38,7 +38,7 @@ data class Product(
             sales,
             description,
             reviews,
-            similarProducts
+            similarProductIds
         )
 
     fun toProductPreview(): ProductPreview =

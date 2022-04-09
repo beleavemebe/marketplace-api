@@ -88,7 +88,7 @@ class DatasetGenerator {
                 sales = sales,
                 description = description,
                 reviews = reviews.toList(),
-                similarProducts = emptyList(),
+                similarProductIds = emptyList(),
             )
         }
             .distinctBy { it.name }
@@ -143,7 +143,7 @@ class DatasetGenerator {
                         it.id
                     }
 
-                result += product.copy(similarProducts = similarProducts)
+                result += product.copy(similarProductIds = similarProducts)
             }
         }
 

@@ -3,7 +3,9 @@ package com.narcissus.marketplace.api.route
 import com.narcissus.marketplace.api.dataset.ProductsDataset
 import com.narcissus.marketplace.api.di.ServiceLocator
 import com.narcissus.marketplace.api.model.ApiStatus
+import com.narcissus.marketplace.api.model.Product
 import com.narcissus.marketplace.api.model.request.OrderRequest
+import com.narcissus.marketplace.api.model.response.wrapToResponse
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.request.*
@@ -57,6 +59,18 @@ fun Application.configureRouting() {
 
         get("products/toprated") {
             val response = productRepository.getTopRatedProducts(8, 1)
+            call.respond(response)
+        }
+
+        get("products/similar/{id}") {
+            val id = call.parameters["id"]
+                ?: throw BadRequestException("Missing 'id' parameter")
+
+            val response = productRepository
+                .getSimilarProducts(id)
+                .map(Product::toProductPreview)
+                .wrapToResponse()
+
             call.respond(response)
         }
 

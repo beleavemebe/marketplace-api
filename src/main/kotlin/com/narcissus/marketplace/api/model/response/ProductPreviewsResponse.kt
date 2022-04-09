@@ -9,3 +9,7 @@ data class ProductPreviewsResponse(
     @SerialName("data")
     val data: List<ProductPreview>
 )
+
+fun List<ProductPreview>.wrapToResponse(): ProductPreviewsResponse {
+    return ProductPreviewsResponse(this)
+}

@@ -1,7 +1,6 @@
 package com.narcissus.marketplace.api.repository.product.dummyproductsapi
 
-import com.narcissus.marketplace.api.model.Product
-import com.narcissus.marketplace.api.repository.product.ProductRepository
+import com.narcissus.marketplace.api.repository.product.RemoteProductRepository
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -9,21 +8,13 @@ import io.ktor.client.request.*
 class DummyProductsServiceImpl(
     private val apiKey: () -> String,
     private val httpClient: HttpClient,
-) : ProductRepository {
+) : RemoteProductRepository {
     override suspend fun getProducts(limit: Int, page: Int): String =
         httpClient.get(Endpoints.PRODUCTS) {
             parameter("limit", limit)
             parameter("page", page)
             parameter("apikey", apiKey())
         }.body()
-
-    override fun insertAll(products: List<Product>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun deleteAll() {
-        TODO("Not yet implemented")
-    }
 
     override suspend fun getRandomProducts(limit: Int, page: Int): String =
         httpClient.get(Endpoints.PRODUCTS_RANDOM) {
