@@ -21,5 +21,50 @@ data class Product(
     val sales: Int,
     val description: String,
     val reviews: List<Review>,
-    val similarProducts: List<Product>,
-)
+    val similarProducts: List<String>,
+) {
+    fun toProductDetails(): ProductDetails =
+        ProductDetails(
+            id,
+            productImg600,
+            name,
+            price,
+            type,
+            departmentName,
+            inStock,
+            color,
+            material,
+            rating,
+            sales,
+            description,
+            reviews,
+            similarProducts
+        )
+
+    fun toProductPreview(): ProductPreview =
+        ProductPreview(
+            id,
+            productImg300,
+            name,
+            price,
+            type,
+            departmentName,
+            inStock,
+            color,
+            material,
+            rating,
+            sales,
+        )
+
+    fun toSimilarProduct(): SimilarProduct =
+        SimilarProduct(
+            id,
+            productImg300,
+            name,
+            price,
+            type,
+            departmentName,
+            inStock,
+            rating
+        )
+}

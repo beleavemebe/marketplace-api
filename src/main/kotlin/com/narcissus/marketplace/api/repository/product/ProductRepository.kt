@@ -1,6 +1,7 @@
 package com.narcissus.marketplace.api.repository.product
 
 import com.narcissus.marketplace.api.Config
+import com.narcissus.marketplace.api.model.Product
 import com.narcissus.marketplace.api.repository.product.dummyproductsapi.DummyProductsServiceImpl
 import io.ktor.client.*
 
@@ -13,12 +14,15 @@ interface ProductRepository {
     suspend fun searchProducts(query: String, page: Int, perPage: Int): String
     suspend fun searchProductsTopRated(query: String, page: Int, perPage: Int): String
     suspend fun searchProductsTopSales(query: String, page: Int, perPage: Int): String
+    suspend fun insertAll(products: List<Product>)
 
     companion object {
         fun newInstance(): ProductRepository {
-            return DummyProductsServiceImpl(
-                apiKey = Config::apiKey,
-                httpClient = HttpClient()
+            return ProductRepositoryImpl(
+                apiService = DummyProductsServiceImpl(
+                    apiKey = Config::apiKey,
+                    httpClient = HttpClient()
+                )
             )
         }
     }

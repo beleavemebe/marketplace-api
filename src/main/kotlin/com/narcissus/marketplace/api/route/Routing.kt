@@ -1,13 +1,14 @@
 package com.narcissus.marketplace.api.route
 
+import com.narcissus.marketplace.api.dataset.ProductsDataset
 import com.narcissus.marketplace.api.di.ServiceLocator
 import com.narcissus.marketplace.api.model.ApiStatus
 import com.narcissus.marketplace.api.model.request.OrderRequest
-import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -30,6 +31,11 @@ fun Application.configureRouting() {
         get("products/{id}") {
             val id = call.parameters["id"] ?: return@get
             val response = productRepository.getProductDetails(id, "true")
+            call.respond(response)
+        }
+
+        get("products") {
+            val response = productRepository.getProducts(10, 1)
             call.respond(response)
         }
 
@@ -63,7 +69,13 @@ fun Application.configureRouting() {
             call.respondFile(imageFile)
         }
 
-        post("actions/checkout")  {
+        get("actions/refresh-dataset") {
+            val dataset = ProductsDataset.createDataset()
+            productRepository.insertAll(dataset)
+            call.respondText("Success")
+        }
+
+        post("actions/checkout") {
             val orderRequest = call.receiveOrNull<OrderRequest>()
                 ?: throw BadRequestException("Could not deserialize order request")
             val response = checkoutService.checkout(orderRequest)

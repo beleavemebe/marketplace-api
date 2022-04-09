@@ -44,6 +44,6 @@ data class ProductDetails(
     @SerialName("product_reviews")
     val reviewsList: List<Review>,
 
-    @SerialName("product_similar")
-    val similarProductsList: List<SimilarProduct>,
+    @SerialName("product_similar_ids")
+    val similarProductsList: List<String>,
 )

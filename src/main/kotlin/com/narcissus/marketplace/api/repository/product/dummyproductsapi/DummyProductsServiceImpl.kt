@@ -1,13 +1,10 @@
 package com.narcissus.marketplace.api.repository.product.dummyproductsapi
 
-import com.narcissus.marketplace.api.model.ProductDetails
-import com.narcissus.marketplace.api.model.request.OrderRequest
+import com.narcissus.marketplace.api.model.Product
 import com.narcissus.marketplace.api.repository.product.ProductRepository
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class DummyProductsServiceImpl(
     private val apiKey: () -> String,
@@ -19,6 +16,10 @@ class DummyProductsServiceImpl(
             parameter("page", page)
             parameter("apikey", apiKey())
         }.body()
+
+    override suspend fun insertAll(products: List<Product>) {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun getRandomProducts(limit: Int, page: Int): String =
         httpClient.get(Endpoints.PRODUCTS_RANDOM) {
@@ -59,9 +60,4 @@ class DummyProductsServiceImpl(
     override suspend fun searchProductsTopSales(query: String, page: Int, perPage: Int): String =
         searchProducts(query, page, perPage)
 
-//    override suspend fun checkout(orderRequest: OrderRequest): String =
-//        httpClient.post(Endpoints.CHECKOUT) {
-//            setBody(Json.encodeToString(orderRequest))
-//            parameter("apikey", apiKey())
-//        }.body()
 }

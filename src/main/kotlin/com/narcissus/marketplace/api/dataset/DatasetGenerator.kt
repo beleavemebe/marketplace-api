@@ -139,6 +139,9 @@ class DatasetGenerator {
                     .shuffled()
                     .take(5)
                     .toList()
+                    .map {
+                        it.id
+                    }
 
                 result += product.copy(similarProducts = similarProducts)
             }

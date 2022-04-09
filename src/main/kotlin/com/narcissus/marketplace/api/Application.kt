@@ -1,5 +1,6 @@
 package com.narcissus.marketplace.api
 
+import com.narcissus.marketplace.api.data.db.initDatabase
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.narcissus.marketplace.api.route.*
@@ -25,6 +26,7 @@ fun main() {
                 }
 
                 initConfig()
+                initDatabase()
                 configureRouting()
             }
         }
