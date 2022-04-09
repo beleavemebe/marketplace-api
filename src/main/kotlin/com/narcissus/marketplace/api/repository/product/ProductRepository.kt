@@ -8,6 +8,7 @@ import com.narcissus.marketplace.api.data.SimilarProducts
 import com.narcissus.marketplace.api.data.db.createMissingTablesAndColumns
 import com.narcissus.marketplace.api.data.db.dropTables
 import com.narcissus.marketplace.api.model.Product
+import com.narcissus.marketplace.api.model.ProductDetails
 import com.narcissus.marketplace.api.model.ProductPreview
 import com.narcissus.marketplace.api.repository.product.dummyproductsapi.DummyProductsServiceImpl
 import io.ktor.client.*
@@ -27,17 +28,49 @@ class ProductRepository(
         )
     }
 
-    override fun getProducts(limit: Int, page: Int): List<ProductPreview> {
-        return transaction {
-            val count = EntityProduct.count().toInt()
-            val start = min(count, (page - 1) * limit)
-            val end = min(count, page * limit)
-            EntityProduct.all()
-                .toList()
-                .slice(start until end)
-                .map(EntityProduct::toProduct)
-                .map(Product::toProductPreview)
+    override fun getProducts(limit: Int, page: Int): List<ProductPreview> = transaction {
+        paginate(limit, page)
+    }
+
+    override fun getRandomProducts(limit: Int, page: Int): List<ProductPreview> = transaction {
+        paginate(limit, page) {
+            shuffled()
         }
+    }
+
+    override fun getTopRatedProducts(limit: Int, page: Int): List<ProductPreview> = transaction {
+        paginate(limit, page) {
+            sortedByDescending { it.rating }
+        }
+    }
+
+    override fun getTopSalesProducts(limit: Int, page: Int): List<ProductPreview> = transaction {
+        paginate(limit, page) {
+            sortedByDescending { it.sales }
+        }
+    }
+
+    private fun paginate(
+        limit: Int,
+        page: Int,
+        transform: List<EntityProduct>.() -> List<EntityProduct> = { this }
+    ): List<ProductPreview> = transaction {
+        val count = EntityProduct.count().toInt()
+        val start = min(count, (page - 1) * limit)
+        val end = min(count, page * limit)
+        EntityProduct.all()
+            .toList()
+            .transform()
+            .slice(start until end)
+            .map(EntityProduct::toProduct)
+            .map(Product::toProductPreview)
+    }
+
+    override fun getProductDetails(productId: String): ProductDetails = transaction {
+        EntityProduct.findById(UUID.fromString(productId))
+            ?.toProduct()
+            ?.toProductDetails()
+            ?: throw IllegalArgumentException("Could not find product by id")
     }
 
     override fun insertAll(products: List<Product>) = transaction {

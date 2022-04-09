@@ -38,7 +38,6 @@ data class Product(
             sales,
             description,
             reviews,
-            similarProductIds
         )
 
     fun toProductPreview(): ProductPreview =
@@ -54,17 +53,5 @@ data class Product(
             material,
             rating,
             sales,
-        )
-
-    fun toSimilarProduct(): SimilarProduct =
-        SimilarProduct(
-            id,
-            productImg300,
-            name,
-            price,
-            type,
-            departmentName,
-            inStock,
-            rating
         )
 }

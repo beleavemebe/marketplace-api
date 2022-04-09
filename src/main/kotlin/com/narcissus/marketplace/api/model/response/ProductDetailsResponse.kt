@@ -9,3 +9,7 @@ data class ProductDetailsResponse(
     @SerialName("data")
     val data: ProductDetails
 )
+
+fun ProductDetails.wrapToResponse(): ProductDetailsResponse {
+    return ProductDetailsResponse(this)
+}

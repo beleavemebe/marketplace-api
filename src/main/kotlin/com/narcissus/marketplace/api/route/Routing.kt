@@ -32,7 +32,11 @@ fun Application.configureRouting() {
 
         get("products/{id}") {
             val id = call.parameters["id"] ?: return@get
-            val response = productRepository.getProductDetails(id, "true")
+
+            val response = productRepository
+                .getProductDetails(id)
+                .wrapToResponse()
+
             call.respond(response)
         }
 
@@ -48,23 +52,46 @@ fun Application.configureRouting() {
         }
 
         get("products/search") {
-            val query = call.parameters["term"] ?: return@get
-            val response = productRepository.searchProducts(query, 1, 1000)
+            val query = call.parameters["term"] ?: ""
+            val limit = call.parameters["limit"]?.toInt() ?: 10
+            val page = call.parameters["page"]?.toInt() ?: 1
+
+            val response = productRepository
+                .searchProducts(query, limit, page)
+
             call.respond(response)
         }
 
         get("products/random") {
-            val response = productRepository.getRandomProducts(8, 1)
+            val limit = call.parameters["limit"]?.toInt() ?: 10
+            val page = call.parameters["page"]?.toInt() ?: 1
+
+            val response = productRepository
+                .getRandomProducts(limit, page)
+                .wrapToResponse()
+
             call.respond(response)
         }
 
         get("products/topsales") {
-            val response = productRepository.getTopSalesProducts(8, 1)
+            val limit = call.parameters["limit"]?.toInt() ?: 10
+            val page = call.parameters["page"]?.toInt() ?: 1
+
+            val response = productRepository
+                .getTopSalesProducts(limit, page)
+                .wrapToResponse()
+
             call.respond(response)
         }
 
         get("products/toprated") {
-            val response = productRepository.getTopRatedProducts(8, 1)
+            val limit = call.parameters["limit"]?.toInt() ?: 10
+            val page = call.parameters["page"]?.toInt() ?: 1
+
+            val response = productRepository
+                .getTopRatedProducts(limit, page)
+                .wrapToResponse()
+
             call.respond(response)
         }
 
