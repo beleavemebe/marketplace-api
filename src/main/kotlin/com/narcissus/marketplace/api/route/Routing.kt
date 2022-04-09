@@ -37,7 +37,13 @@ fun Application.configureRouting() {
         }
 
         get("products") {
-            val response = productRepository.getProducts(10, 1)
+            val limit = call.parameters["limit"]?.toInt() ?: 10
+            val page = call.parameters["page"]?.toInt() ?: 1
+
+            val response = productRepository
+                .getProducts(limit, page)
+                .wrapToResponse()
+
             call.respond(response)
         }
 

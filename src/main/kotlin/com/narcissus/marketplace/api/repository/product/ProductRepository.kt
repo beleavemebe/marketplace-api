@@ -8,13 +8,12 @@ import com.narcissus.marketplace.api.data.SimilarProducts
 import com.narcissus.marketplace.api.data.db.createMissingTablesAndColumns
 import com.narcissus.marketplace.api.data.db.dropTables
 import com.narcissus.marketplace.api.model.Product
-import com.narcissus.marketplace.api.model.response.ProductPreviewsResponse
+import com.narcissus.marketplace.api.model.ProductPreview
 import com.narcissus.marketplace.api.repository.product.dummyproductsapi.DummyProductsServiceImpl
 import io.ktor.client.*
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
+import kotlin.math.min
 
 class ProductRepository(
     private val apiService: DummyProductsServiceImpl
@@ -28,13 +27,16 @@ class ProductRepository(
         )
     }
 
-    override suspend fun getProducts(limit: Int, page: Int): String {
+    override fun getProducts(limit: Int, page: Int): List<ProductPreview> {
         return transaction {
-            EntityProduct.all().toList().map(EntityProduct::toProduct)
-        }.let { products ->
-            ProductPreviewsResponse(products.map(Product::toProductPreview))
-        }.run {
-            Json.encodeToString(this)
+            val count = EntityProduct.count().toInt()
+            val start = min(count, (page - 1) * limit)
+            val end = min(count, page * limit)
+            EntityProduct.all()
+                .toList()
+                .slice(start until end)
+                .map(EntityProduct::toProduct)
+                .map(Product::toProductPreview)
         }
     }
 

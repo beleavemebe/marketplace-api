@@ -9,13 +9,6 @@ class DummyProductsServiceImpl(
     private val apiKey: () -> String,
     private val httpClient: HttpClient,
 ) : RemoteProductRepository {
-    override suspend fun getProducts(limit: Int, page: Int): String =
-        httpClient.get(Endpoints.PRODUCTS) {
-            parameter("limit", limit)
-            parameter("page", page)
-            parameter("apikey", apiKey())
-        }.body()
-
     override suspend fun getRandomProducts(limit: Int, page: Int): String =
         httpClient.get(Endpoints.PRODUCTS_RANDOM) {
             parameter("limit", limit)

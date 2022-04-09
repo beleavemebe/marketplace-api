@@ -1,7 +1,6 @@
 package com.narcissus.marketplace.api.repository.product
 
 interface RemoteProductRepository {
-    suspend fun getProducts(limit: Int, page: Int): String
     suspend fun getRandomProducts(limit: Int, page: Int): String
     suspend fun getTopRatedProducts(limit: Int, page: Int): String
     suspend fun getTopSalesProducts(limit: Int, page: Int): String
