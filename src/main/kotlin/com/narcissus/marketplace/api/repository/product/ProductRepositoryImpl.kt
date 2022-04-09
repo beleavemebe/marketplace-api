@@ -3,6 +3,8 @@ package com.narcissus.marketplace.api.repository.product
 import com.narcissus.marketplace.api.data.EntityProduct
 import com.narcissus.marketplace.api.data.EntityReview
 import com.narcissus.marketplace.api.data.EntitySimilarProducts
+import com.narcissus.marketplace.api.data.db.createMissingTablesAndColumns
+import com.narcissus.marketplace.api.data.db.dropTables
 import com.narcissus.marketplace.api.model.Product
 import com.narcissus.marketplace.api.model.response.ProductPreviewsResponse
 import com.narcissus.marketplace.api.repository.product.dummyproductsapi.DummyProductsServiceImpl
@@ -24,7 +26,7 @@ class ProductRepositoryImpl(
         }
     }
 
-    override suspend fun insertAll(products: List<Product>) = transaction {
+    override fun insertAll(products: List<Product>) = transaction {
         products.forEach {
             insertProduct(it)
             insertReviews(it)
@@ -70,5 +72,10 @@ class ProductRepositoryImpl(
                 similarProductId = it
             }
         }
+    }
+
+    override fun deleteAll() = transaction {
+        dropTables()
+        createMissingTablesAndColumns()
     }
 }

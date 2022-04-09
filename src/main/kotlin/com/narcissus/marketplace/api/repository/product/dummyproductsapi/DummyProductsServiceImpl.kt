@@ -17,7 +17,11 @@ class DummyProductsServiceImpl(
             parameter("apikey", apiKey())
         }.body()
 
-    override suspend fun insertAll(products: List<Product>) {
+    override fun insertAll(products: List<Product>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteAll() {
         TODO("Not yet implemented")
     }
 

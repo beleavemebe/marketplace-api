@@ -71,6 +71,7 @@ fun Application.configureRouting() {
 
         get("actions/refresh-dataset") {
             val dataset = ProductsDataset.createDataset()
+            productRepository.deleteAll()
             productRepository.insertAll(dataset)
             call.respondText("Success")
         }

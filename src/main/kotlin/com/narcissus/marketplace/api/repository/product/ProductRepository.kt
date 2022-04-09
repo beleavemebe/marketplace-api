@@ -14,7 +14,8 @@ interface ProductRepository {
     suspend fun searchProducts(query: String, page: Int, perPage: Int): String
     suspend fun searchProductsTopRated(query: String, page: Int, perPage: Int): String
     suspend fun searchProductsTopSales(query: String, page: Int, perPage: Int): String
-    suspend fun insertAll(products: List<Product>)
+    fun insertAll(products: List<Product>)
+    fun deleteAll()
 
     companion object {
         fun newInstance(): ProductRepository {
