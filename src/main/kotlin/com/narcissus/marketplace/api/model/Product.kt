@@ -43,7 +43,7 @@ data class Product(
     fun toProductPreview(): ProductPreview =
         ProductPreview(
             id,
-            productImg300,
+            productImg600,
             name,
             price,
             type,
