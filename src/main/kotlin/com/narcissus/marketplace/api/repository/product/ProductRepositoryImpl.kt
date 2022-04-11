@@ -81,7 +81,7 @@ class ProductRepositoryImpl : ProductRepository {
         EntityProduct.findById(UUID.fromString(productId))
             ?.toProduct()
             ?.toProductDetails()
-            ?: throw IllegalArgumentException("Could not find product by id")
+            ?: throw IllegalArgumentException("Could not find product by id $productId")
     }
 
     override fun insertAll(products: List<Product>) = transaction {

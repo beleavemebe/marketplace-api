@@ -43,4 +43,20 @@ data class ProductDetails(
 
     @SerialName("product_reviews")
     val reviewsList: List<Review>,
-)
+) {
+    fun toProductPreview(): ProductPreview {
+        return ProductPreview(
+            id = id,
+            icon = productImg,
+            name = name,
+            price = price,
+            type = type,
+            departmentName = departmentName,
+            stock = stock,
+            color = color,
+            material = material,
+            rating = rating,
+            sales = sales
+        )
+    }
+}

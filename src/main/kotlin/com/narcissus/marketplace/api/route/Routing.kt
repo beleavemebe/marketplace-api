@@ -14,10 +14,12 @@ import io.ktor.server.routing.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
+import kotlin.math.min
 
 fun Application.configureRouting() {
     val productRepository = ServiceLocator.productRepository
     val checkoutService = ServiceLocator.checkoutService
+    val orderRepository = ServiceLocator.orderRepository
 
     routing {
         get("departments") {
@@ -91,6 +93,18 @@ fun Application.configureRouting() {
 
             val response = productRepository
                 .getTopRatedProducts(limit, page)
+                .wrapToResponse()
+
+            call.respond(response)
+        }
+
+        get("products/people-are-buying") {
+            val orders = orderRepository.getAll()
+            val response = orders
+                .slice(0 until min(8, orders.size))
+                .flatMap { order -> order.orderItems }
+                .map { orderItem -> orderItem.id }
+                .map { id -> productRepository.getProductDetails(id).toProductPreview() }
                 .wrapToResponse()
 
             call.respond(response)

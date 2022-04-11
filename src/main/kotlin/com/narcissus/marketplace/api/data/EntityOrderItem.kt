@@ -9,7 +9,7 @@ import java.util.*
 class EntityOrderItem(id: EntityID<UUID>) : UUIDEntity(id) {
     fun toOrderItem(): OrderItem {
         return OrderItem(
-            id = id.value.toString(),
+            id = product.id.value.toString(),
             amount = amount,
         )
     }
