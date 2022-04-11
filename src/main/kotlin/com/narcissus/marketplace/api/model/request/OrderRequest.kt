@@ -8,5 +8,5 @@ data class OrderRequest(
     @SerialName("id")
     val id: String,
     @SerialName("order_items")
-    val orderItems: List<OrderRequestItem>
+    val orderItems: List<OrderItem>
 )

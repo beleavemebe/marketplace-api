@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OrderRequestItem(
+data class OrderItem(
     @SerialName("product_id")
     val id: String,
 

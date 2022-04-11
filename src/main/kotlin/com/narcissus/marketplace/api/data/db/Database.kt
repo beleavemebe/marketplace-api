@@ -1,16 +1,13 @@
 package com.narcissus.marketplace.api.data.db
 
-import com.narcissus.marketplace.api.data.Products
-import com.narcissus.marketplace.api.data.Reviews
-import com.narcissus.marketplace.api.data.SalesInfo
-import com.narcissus.marketplace.api.data.SimilarProducts
+import com.narcissus.marketplace.api.data.*
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
-val tables = arrayOf(Products, Reviews, SalesInfo, SimilarProducts)
+val tables = arrayOf(Products, Reviews, SalesInfo, SimilarProducts, Orders, OrderItems)
 
 fun Application.initDatabase() {
     val dbConfig = environment.config.config("database")
