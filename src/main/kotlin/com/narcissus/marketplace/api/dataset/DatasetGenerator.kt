@@ -137,7 +137,7 @@ class DatasetGenerator {
                     .filterNot { it.type == product.type }
                     .distinctBy { it.type }
                     .shuffled()
-                    .take(5)
+                    .take(2)
                     .toList()
                     .map {
                         it.id
