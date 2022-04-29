@@ -9,6 +9,7 @@ import com.narcissus.marketplace.api.data.db.dropTables
 import com.narcissus.marketplace.api.model.Product
 import com.narcissus.marketplace.api.model.ProductDetails
 import com.narcissus.marketplace.api.model.ProductPreview
+import com.narcissus.marketplace.api.model.response.FiltersConfiguration
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 import kotlin.math.min
@@ -36,11 +37,48 @@ class ProductRepositoryImpl : ProductRepository {
                 .sortedByDescending { it.sales }
         }
 
-    override fun searchProducts(query: String, limit: Int, page: Int): List<ProductPreview> =
+    override fun searchProducts(query: String, limit: Int, page: Int, filtersConfiguration: FiltersConfiguration): List<ProductPreview> =
         paginate(limit, page) { products ->
             products
                 .filter { it.name.contains(query, ignoreCase = true) }
+                .applyFilters(filtersConfiguration)
         }
+
+    private fun List<EntityProduct>.applyFilters(
+        configuration: FiltersConfiguration
+    ): List<EntityProduct> {
+        val result = this.toMutableList()
+
+        if (configuration.department != null) {
+            result -= filter {
+                it.departmentName != configuration.department
+            }.toSet()
+        }
+
+        result -= filter {
+            it.price !in configuration.priceLowerBound..configuration.priceUpperBound
+        }.toSet()
+
+        if (configuration.material != null) {
+            result -= filter {
+                it.material != configuration.material
+            }.toSet()
+        }
+
+        if (configuration.color != null) {
+            result -= filter {
+                it.color != configuration.color
+            }.toSet()
+        }
+
+        return when (configuration.sortBy) {
+            "rating" -> result.sortedByDescending { it.rating }
+            "sales" -> result.sortedByDescending { it.sales }
+            "price" -> result.sortedByDescending { it.price }
+            "do_not_sort" -> result
+            else -> error("Unknown sortBy preference ${configuration.sortBy}")
+        }
+    }
 
     override fun searchProductsTopRated(query: String, limit: Int, page: Int): List<ProductPreview> =
         paginate(limit, page) { products ->

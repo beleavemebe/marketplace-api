@@ -3,6 +3,7 @@ package com.narcissus.marketplace.api.repository.product
 import com.narcissus.marketplace.api.model.Product
 import com.narcissus.marketplace.api.model.ProductDetails
 import com.narcissus.marketplace.api.model.ProductPreview
+import com.narcissus.marketplace.api.model.response.FiltersConfiguration
 
 interface ProductRepository {
     fun getProducts(limit: Int, page: Int): List<ProductPreview>
@@ -13,7 +14,7 @@ interface ProductRepository {
     fun insertAll(products: List<Product>)
     fun deleteAll()
     fun getSimilarProducts(id: String): List<Product>
-    fun searchProducts(query: String, limit: Int, page: Int): List<ProductPreview>
+    fun searchProducts(query: String, limit: Int, page: Int, filtersConfiguration: FiltersConfiguration): List<ProductPreview>
     fun searchProductsTopRated(query: String, limit: Int, page: Int): List<ProductPreview>
     fun searchProductsTopSales(query: String, limit: Int, page: Int): List<ProductPreview>
 }
