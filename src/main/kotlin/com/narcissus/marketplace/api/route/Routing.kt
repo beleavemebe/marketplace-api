@@ -30,7 +30,7 @@ fun Application.configureRouting() {
 
         get("status") {
             val status = ApiStatus(isAvailable = true)
-            call.respond(Json.encodeToString(status))
+            call.respond(status)
         }
 
         get("products/{id}") {
