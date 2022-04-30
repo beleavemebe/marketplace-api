@@ -5,8 +5,7 @@ import com.narcissus.marketplace.api.di.ServiceLocator
 import com.narcissus.marketplace.api.model.ApiStatus
 import com.narcissus.marketplace.api.model.Product
 import com.narcissus.marketplace.api.model.request.OrderRequest
-import com.narcissus.marketplace.api.model.response.FiltersConfiguration
-import com.narcissus.marketplace.api.model.response.SearchFiltersResponse
+import com.narcissus.marketplace.api.model.FiltersConfiguration
 import com.narcissus.marketplace.api.model.response.wrapToResponse
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
@@ -128,20 +127,14 @@ fun Application.configureRouting() {
             call.respondText("Success")
         }
 
-        get("products/search/filters/{query}}") {
-            call.respond(
-                SearchFiltersResponse(
-                    departmentValues = listOf("Toys"),
-                    priceLowerBound = 10,
-                    priceUpperBound = 100,
-                    materialValues = listOf("Steel", "Wood", "Concrete"),
-                    colorValues = listOf("Blue", "Red", "Indigo"),
-                    productsAmount = 86,
-                )
-            )
+        get("products/filters/{query}") {
+            val query = call.parameters["query"]
+            val response = productRepository.getFiltersForQuery(query)
+            call.respond(response)
         }
 
-        post("products/search/amount") {
+        post("products/amount/{query}") {
+            val query = call.parameters["query"]
             val filtersConfiguration = call.receiveOrNull<FiltersConfiguration>()
                 ?: throw BadRequestException("Could not deserialize filter configuration")
         }
@@ -151,7 +144,6 @@ fun Application.configureRouting() {
             val limit = call.parameters["limit"]?.toInt() ?: 10
             val page = call.parameters["page"]?.toInt() ?: 1
             val filtersConfiguration = call.receiveOrNull<FiltersConfiguration>()
-                ?: throw BadRequestException("Could not deserialize filter configuration")
 
             val response = productRepository
                 .searchProducts(query, limit, page, filtersConfiguration)
